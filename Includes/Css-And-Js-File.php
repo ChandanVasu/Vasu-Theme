@@ -1,12 +1,8 @@
-<!-- <?php 
+<?php
 
+function enqueue_styles_and_scripts() {
+    // Enqueue CSS file
+    wp_enqueue_style('Grid-Post-1', get_template_directory_uri() . '/Assets/Styles/Elementor/Grid-Post-1.css');
+}
 
-// Enqueue Styles and Scripts
-
-
-
-// function enqueue_custom_scripts() {
-//     // Enqueue custom JavaScript file
-//     wp_enqueue_script('custom-script', get_template_directory_uri() . '/Jsfile/custom.js', array(), null, true);
-// }
-// add_action('wp_enqueue_scripts', 'enqueue_custom_scripts'); -->
+add_action('wp_enqueue_scripts', 'enqueue_styles_and_scripts');
