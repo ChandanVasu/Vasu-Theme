@@ -14,6 +14,10 @@ function theme_setup() {
 add_action('after_setup_theme', 'theme_setup');
 
 
+
+include_once get_template_directory() . '/Includes/Css-And-Js-File.php';
+
+
 function your_theme_register_header_style_customizer($wp_customize) {
     // Add section for header style
     $wp_customize->add_section('header_section', array(
@@ -94,5 +98,13 @@ function add_elementor_widget_categories( $elements_manager ) {
 }
 
 add_action('elementor/elements/categories_registered', 'add_elementor_widget_categories');
+
+
+function enqueue_styles_and_scripts() {
+    // Enqueue CSS file
+    wp_enqueue_style('Grid-Post-1', get_template_directory_uri() . '/Assets/Styles/Elementor/Grid-Post-1.css');
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_styles_and_scripts');
 
 
