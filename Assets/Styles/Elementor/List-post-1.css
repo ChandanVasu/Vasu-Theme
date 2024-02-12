@@ -1,0 +1,84 @@
+/* Define color variables */
+:root {
+    --background-color: #ffffff;
+    /* Background color of each post item */
+    --border-color: #0b4dd2;
+    /* Border color of each post item */
+    --text-color: #333;
+    /* Text color */
+    --meta-color: #777;
+    /* Meta information color */
+    --author-color: #ff0000;
+    /* Author color */
+}
+
+/* Apply CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* List container */
+.el-l-1-list-container {
+    padding: 0; /* Remove padding */
+    list-style: none; /* Remove default list styles */
+}
+
+/* Post item styles */
+.el-l-1-custom-post-item-vasutheme {
+    background-color: var(--background-color);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px; /* Add margin bottom for separation */
+}
+
+/* Post title */
+.el-l-1-post-title-vasutheme a {
+    color: var(--text-color);
+    line-height: normal;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 10px;
+    display: block; /* Ensure title spans full width */
+}
+
+.el-l-1-post-title-vasutheme:hover {
+    text-decoration: underline;
+    color: rgb(255, 157, 0);
+}
+
+/* Category styles */
+.el-l-1-category-meta-vasutheme a {
+    display: inline-block;
+    background-color: var(--author-color); /* Change to author color */
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: #fff; /* Change text color to white */
+}
+
+/* Meta information styles */
+.el-l-1-post-meta-vasutheme {
+    text-transform: uppercase;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.el-l-1-post-meta-vasutheme a {
+    color: var(--meta-color);
+}
+
+.el-l-1-post-meta-vasutheme a:hover {
+    color: rgb(113, 112, 109);
+}
+
+/* Author avatar styles */
+.el-l-1-author-avatar-vasutheme {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px !important;
+    border: solid 1px rgba(22, 69, 224, 0.3);
+}

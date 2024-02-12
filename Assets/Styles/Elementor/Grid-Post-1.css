@@ -8,7 +8,7 @@
 :root {
     --background-color: #fff;
     /* Background color of each post item */
-    --border-color: #0b4dd2;
+    --border-color: #0c52de;
     /* Border color of each post item */
     --text-color: #333;
     /* Text color */
@@ -28,22 +28,22 @@
     /* Adjust the gap between grid items */
 }
 
-.el-g-1-custom-post-item-vasutheme {
+/* .el-g-1-custom-post-item-vasutheme {
     position: relative;
     background-color: #b1e0ed;
     padding: 12px;
     border-radius: 10px;
-    /* Fixed syntax issue */
     border: solid 1px var(--border-color);
-    /* Added border property */
-}
+} */
 
 .el-g-1-post-title-vasutheme a {
     color: var(--text-color);
     line-height: normal;
-    font-size: 15px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
     font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 10px;
+
 }
 
 .el-g-1-post-title-vasutheme:hover {
@@ -54,21 +54,37 @@
 
 
 .el-g-1-custom-post-item-vasutheme {
-    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: start;
+    background-color: #ececfa;
     padding: 12px;
     border-radius: 10px;
     border: 1px solid var(--border-color);
     /* Add border property */
 }
 
-.el-g-1-custom-post-item-vasutheme .el-g-1-post-thumbnail-vasutheme  {
+
+
+.el-g-1-custom-post-item-vasutheme .el-g-1-post-thumbnail-vasutheme img {
     border-radius: 10px;
-    border: solid 1px rgba(0, 0, 0, 0.2);
+    height: 180px;
+    width:100%;
+
 }
 
-.el-g-1-category-meta-vasutheme a{
-display: inline-block;
-    background-color: #ff0000;
+.el-g-1-custom-post-item-vasutheme:hover{
+    transform: scale(1.03);}
+
+
+  
+  
+
+
+.el-g-1-category-meta-vasutheme a {
+    display: inline-block;
+    background-color: #000000;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
@@ -78,18 +94,32 @@ display: inline-block;
     color: rgb(255, 255, 255);
 }
 
-.el-g-1_post-meta-vasutheme{
-
-     display: inline-flex;
-     justify-content: center;
-     align-items: center;
+.el-g-1-post-meta-vasutheme {
+    text-transform: uppercase;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     margin-top: 10px;
     bottom: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
 }
+
+.el-g-1-post-meta-vasutheme a {
+    color: black;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+
+}
+
+.el-g-1-post-meta-vasutheme a:hover {
+    color: rgb(113, 112, 109);
+}
+
 .el-g-1-author-avatar-vasutheme {
-    height: 30px;
+    height: 20px;
     width: 30px;
-    border-radius: 50% !important;
+    border-radius: 100% !important;
+    border: solid 1px rgb(22, 69, 224, 0.3);
 }
-
-
