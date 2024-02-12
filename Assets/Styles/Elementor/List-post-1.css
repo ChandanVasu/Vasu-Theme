@@ -1,40 +1,47 @@
-/* Define color variables */
-:root {
-    --background-color: #ffffff;
-    /* Background color of each post item */
-    --border-color: #0b4dd2;
-    /* Border color of each post item */
-    --text-color: #333;
-    /* Text color */
-    --meta-color: #777;
-    /* Meta information color */
-    --author-color: #ff0000;
-    /* Author color */
-}
-
-/* Apply CSS reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* List container */
-.el-l-1-list-container {
-    padding: 0; /* Remove padding */
-    list-style: none; /* Remove default list styles */
-}
 
-/* Post item styles */
+
+
 .el-l-1-custom-post-item-vasutheme {
-    background-color: var(--background-color);
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 20px; /* Add margin bottom for separation */
+    display: flex;
+    flex-direction: row; /* Display items horizontally */
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
-/* Post title */
+.el-l-1-post-thumbnail-vasutheme {
+    width: 180px; /* Adjust the width of the image container */
+}
+
+.el-l-1-custom-post-item-vasutheme .el-l-1-post-thumbnail-vasutheme img {
+    border-radius: 10px;
+    height: 100px;
+    width: 100%;
+    max-width: 150px;
+    margin-right: 20px;
+}
+
+.el-l-1-post-thumbnail-vasutheme{
+    margin-right: 20px;
+    height: 100px;
+    width: 100%;
+    max-width: 150px;
+}
+
+.el-l-1-post-content {
+    flex: 1; /* Take remaining space */
+    padding-left: 20px; /* Add spacing between image and content */
+}
+
+
+
 .el-l-1-post-title-vasutheme a {
     color: var(--text-color);
     line-height: normal;
@@ -42,43 +49,82 @@
     font-weight: 500;
     font-family: 'Rubik', sans-serif;
     margin-bottom: 10px;
-    display: block; /* Ensure title spans full width */
 }
 
-.el-l-1-post-title-vasutheme:hover {
-    text-decoration: underline;
-    color: rgb(255, 157, 0);
-}
-
-/* Category styles */
-.el-l-1-category-meta-vasutheme a {
-    display: inline-block;
-    background-color: var(--author-color); /* Change to author color */
-    padding: 5px 10px;
-    margin: 5px;
-    border-radius: 5px;
-    color: #fff; /* Change text color to white */
-}
-
-/* Meta information styles */
 .el-l-1-post-meta-vasutheme {
     text-transform: uppercase;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
     font-family: 'Rubik', sans-serif;
-    font-weight: 500;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.el-l-1-post-meta-vasutheme a {
-    color: var(--meta-color);
+.el-l-1-category-meta-vasutheme a {
+  
+    color: black;
 }
 
-.el-l-1-post-meta-vasutheme a:hover {
-    color: rgb(113, 112, 109);
-}
 
-/* Author avatar styles */
 .el-l-1-author-avatar-vasutheme {
-    height: 30px;
+    height: 20px;
     width: 30px;
-    border-radius: 50px !important;
+    border-radius: 100% !important;
     border: solid 1px rgba(22, 69, 224, 0.3);
+    margin-right: 10px;
+
+
+}
+
+.el-l-1-name-meta-vasutheme:hover {
+    text-decoration: underline;
+    color: rgb(229, 11, 11);
+   
+}
+
+
+.el-l-1-date-meta-vasutheme{
+    margin-left: 10px;
+}
+
+.el-l-1-name-meta-vasutheme{
+color: black;
+}
+
+@media(max-width:768px){
+
+    .el-l-1-custom-post-item-vasutheme {
+        display: flex;
+        flex-direction: row; /* Display items horizontally */
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .el-l-1-post-title-vasutheme a {
+        color: var(--text-color);
+        line-height: normal;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Rubik', sans-serif;
+        margin-bottom: 10px;
+    }
+
+    
+.el-l-1-post-thumbnail-vasutheme{
+    margin-right: 10px;
+    width: 100%;
+    max-width: 100px;
+    object-fit: cover;
+}
+
+.el-l-1-custom-post-item-vasutheme .el-l-1-post-thumbnail-vasutheme img {
+    border-radius: 10px;
+    height: 100px;
+    width: 100%;
+    max-width: 100px;
+    /* margin-right: 10px; */
+}
+
 }

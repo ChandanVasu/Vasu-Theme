@@ -28,8 +28,9 @@ class List_Post_1 extends \Elementor\Widget_Base
     // Define content to be displayed in the widget
     protected function render()
     {
+        
         $settings = $this->get_settings();
-    
+
         // Query posts
         $query_args = [
             'post_type'      => 'post',
@@ -37,9 +38,9 @@ class List_Post_1 extends \Elementor\Widget_Base
             'category__in' => isset($settings['category']) ? $settings['category'] : [],
             'offset'         => isset($settings['offset']) ? $settings['offset'] : 0, // Post offset
         ];
-    
+
         $posts_query = new WP_Query($query_args);
-    
+
         // Display posts
         if ($posts_query->have_posts()) :
             ?>
@@ -50,6 +51,9 @@ class List_Post_1 extends \Elementor\Widget_Base
                             <div class="el-l-1-post-thumbnail-vasutheme">
                                 <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail("full"); ?></a>
                             </div>
+
+                            <div class="el-l-1-all-content-vasutheme">
+
                         <?php endif; ?>
                         <?php if ($settings['show_category']) : ?>
                             <span class="el-l-1-category-meta-vasutheme"><?php the_category(', '); ?></span>
@@ -57,22 +61,29 @@ class List_Post_1 extends \Elementor\Widget_Base
                         <?php if ($settings['show_title']) : ?>
                             <h2 class="el-l-1-post-title-vasutheme"><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), $settings['title_length'], '...'); ?></a></h2>
                         <?php endif; ?>
+
+                        <?php if ($settings['show_meta']) : ?>
+                            <div class="el-l-1-post-meta-vasutheme">
+                                <?php
+                                $author_id = get_the_author_meta('ID');
+                            $author_avatar = get_avatar_url($author_id, ['size' => 32]);
+                            ?>
+                                <?php if ($settings['author_image']) : ?>
+                                    <img class="el-l-1-author-avatar-vasutheme" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr(get_the_author()); ?>" >
+                                <?php endif; ?>
+                                <a  class="el-l-1-name-meta-vasutheme" href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a>
+                                <span class="el-l-1-date-meta-vasutheme"><?php echo get_the_date(); ?></span>
+                            </div>
+                        <?php endif; ?>
     
                         <?php if ($settings['show_content']) : ?>
                             <div class="el-l-1-post-content-vasutheme">
                                 <?php echo wp_trim_words(get_the_content(), $settings['content_length'], '...'); ?>
                             </div>
-    
-                            <div class="el-l-1-post-meta-vasutheme">
-                                <?php
-                                $author_id = get_the_author_meta('ID');
-                                $author_avatar = get_avatar_url($author_id, ['size' => 32]);
-                                ?>
-                                <img class="el-l-1-author-avatar-vasutheme" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr(get_the_author()); ?>" >
-                                <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a> ||
-                                <span class="el-l-1-date-meta-vasutheme"><?php echo get_the_date(); ?></span>
-                            </div>
                         <?php endif; ?>
+                        
+
+                                </div>
                     </div>
                 <?php endwhile; ?>
             </div>
@@ -81,7 +92,7 @@ class List_Post_1 extends \Elementor\Widget_Base
             echo __('No posts found', 'vasutheme');
         endif;
     }
-    
+
 
     // Define widget settings fields
     protected function _register_controls()
@@ -93,6 +104,7 @@ class List_Post_1 extends \Elementor\Widget_Base
                 'label' => __('Content', 'vasutheme'),
             ]
         );
+
         $this->add_control(
             'category',
             [
@@ -139,6 +151,9 @@ class List_Post_1 extends \Elementor\Widget_Base
             ]
         );
 
+
+
+
         $this->end_controls_section();
 
         // Style Section
@@ -168,6 +183,15 @@ class List_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'show_meta',
+            [
+                'label'   => __('Show Meta', 'vasutheme'),
+                'type'    => \Elementor\Controls_Manager::SWITCHER,
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
             'show_title',
             [
                 'label'   => __('Show Title', 'vasutheme'),
@@ -177,11 +201,20 @@ class List_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'author_image',
+            [
+                'label'   => __('Author Image', 'vasutheme'),
+                'type'    => \Elementor\Controls_Manager::SWITCHER,
+                'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
             'show_content',
             [
                 'label'   => __('Show Content', 'vasutheme'),
                 'type'    => \Elementor\Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'default' => 'no',
             ]
         );
 
@@ -209,14 +242,37 @@ class List_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'author_color',
+            'transform_hover',
             [
-                'label'     => __('Author Color', 'vasutheme'),
-                'type'      => \Elementor\Controls_Manager::COLOR,
-                //'default'   => '#000', // Default color value
-                'selectors' => [
-                    '{{WRAPPER}} .el-l-1-post-meta-vasutheme a' => 'color: {{VALUE}};',
+                'label' => __('Hover Transform', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [''],
+                'range' => [
+                    'px' => [
+                        'min' => 0.5,
+                        'max' => 2,
+                        'step' => 0.01,
+                    ],
                 ],
+                'default' => [
+                    'unit' => '',
+                    'size' => 1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme:hover' => 'transform: scale({{SIZE}});',
+                ],
+            ]
+        );
+
+
+        $this->end_controls_section();
+
+        // Title Style Section
+        $this->start_controls_section(
+            'section_title_style',
+            [
+                'label' => __('Title', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
@@ -225,7 +281,6 @@ class List_Post_1 extends \Elementor\Widget_Base
             [
                 'label'     => __('Title Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
-                //'default'   => '#000', // Default color value
                 'selectors' => [
                     '{{WRAPPER}} .el-l-1-post-title-vasutheme a' => 'color: {{VALUE}};',
                 ],
@@ -233,35 +288,31 @@ class List_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'background_color',
+            'title_hover_text_decoration',
             [
-                'label'     => __('Background Color', 'vasutheme'),
-                'type'      => \Elementor\Controls_Manager::COLOR,
-               // 'default'   => '#000', // Default color value
+                'label' => __('Title Text Decoration (Hover)', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __('None', 'vasutheme'),
+                    'underline' => __('Underline', 'vasutheme'),
+                    'overline' => __('Overline', 'vasutheme'),
+                    'line-through' => __('Line Through', 'vasutheme'),
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-1-post-title-vasutheme:hover ' => 'text-decoration: {{VALUE}};',
                 ],
             ]
         );
 
         $this->add_control(
-            'content_color',
+            'title_hover_text_color',
             [
-                'label'     => __('Content Color', 'vasutheme'),
-                'type'      => \Elementor\Controls_Manager::COLOR,
-                //'default'   => '#333', // Default color value
+                'label' => __('Title Text Color (Hover)', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-l-1-post-content-vasutheme' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-1-post-title-vasutheme:hover' => 'color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name'     => 'content_typography',
-                'label'    => __('Content Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-l-1-post-content-vasutheme',
             ]
         );
 
@@ -274,33 +325,16 @@ class List_Post_1 extends \Elementor\Widget_Base
             ]
         );
 
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
+        $this->end_controls_section();
+
+        // Category Style Section
+        $this->start_controls_section(
+            'section_category_style',
             [
-                'name'     => 'author_typography',
-                'label'    => __('Author Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-l-1-post-meta-vasutheme a',
+                'label' => __('Category', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name'     => 'date_typography',
-                'label'    => __('Date Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-l-1-date-meta-vasutheme',
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name'     => 'category_typography',
-                'label'    => __('Category Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-l-1-category-meta-vasutheme',
-            ]
-        );
-
 
         $this->add_control(
             'category_text_color',
@@ -324,9 +358,190 @@ class List_Post_1 extends \Elementor\Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'category_typography',
+                'label'    => __('Category Typography', 'vasutheme'),
+                'selector' => '{{WRAPPER}} .el-l-1-category-meta-vasutheme',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Author Style Section
+        $this->start_controls_section(
+            'section_author_style',
+            [
+                'label' => __('Author', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'author_color',
+            [
+                'label'     => __('Author Color', 'vasutheme'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-post-meta-vasutheme a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'author_typography',
+                'label'    => __('Author Typography', 'vasutheme'),
+                'selector' => '{{WRAPPER}} .el-l-1-post-meta-vasutheme a',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Date Style Section
+        $this->start_controls_section(
+            'section_date_style',
+            [
+                'label' => __('Date', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'date_typography',
+                'label'    => __('Date Typography', 'vasutheme'),
+                'selector' => '{{WRAPPER}} .el-l-1-date-meta-vasutheme',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Content Style Section
+        $this->start_controls_section(
+            'section_content_style',
+            [
+                'label' => __('Content', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'content_color',
+            [
+                'label'     => __('Content Color', 'vasutheme'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-post-content-vasutheme' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'content_typography',
+                'label'    => __('Content Typography', 'vasutheme'),
+                'selector' => '{{WRAPPER}} .el-l-1-post-content-vasutheme',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Container Style Section
+        $this->start_controls_section(
+            'section_container_style',
+            [
+                'label' => __('Container', 'vasutheme'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'border_color',
+            [
+                'label' => __('Border Color', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_width',
+            [
+                'label' => __('Border Width', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_style',
+            [
+                'label' => __('Border Style', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'solid' => __('Solid', 'vasutheme'),
+                    'dotted' => __('Dotted', 'vasutheme'),
+                    'dashed' => __('Dashed', 'vasutheme'),
+                    'double' => __('Double', 'vasutheme'),
+                    'groove' => __('Groove', 'vasutheme'),
+                    'ridge' => __('Ridge', 'vasutheme'),
+                    'inset' => __('Inset', 'vasutheme'),
+                    'outset' => __('Outset', 'vasutheme'),
+                    'none' => __('None', 'vasutheme'),
+                    'hidden' => __('Hidden', 'vasutheme'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'border-style: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_radius',
+            [
+                'label' => __('Border Radius', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'background_color',
+            [
+                'label'     => __('Background Color', 'vasutheme'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'box_shadow',
+                'selector' => '{{WRAPPER}} .el-l-1-custom-post-item-vasutheme',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
+    // Get all categories
     private function get_all_categories_options()
     {
         $categories = get_categories();
@@ -336,4 +551,5 @@ class List_Post_1 extends \Elementor\Widget_Base
         }
         return $options;
     }
+
 }
