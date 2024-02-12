@@ -18,13 +18,7 @@ $selected_header_style = get_theme_mod('header_style_setting', 'header1'); // Ge
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
-<!-- Swiper Cdn -->
-    <!-- <link
-     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<!-- swiper cdn -->
 
     <!-- This Is Icon Cdn -->
     <script src="https://kit.fontawesome.com/34e6d2d9a0.js" crossorigin="anonymous"></script>

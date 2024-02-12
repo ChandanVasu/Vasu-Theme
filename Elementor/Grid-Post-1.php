@@ -71,8 +71,10 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                                 $author_id = get_the_author_meta('ID');
                             $author_avatar = get_avatar_url($author_id, ['size' => 32]);
                             ?>
+                            <?php if ($settings['author_image']) : ?>
                                 <img class="el-g-1-author-avatar-vasutheme" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr(get_the_author()); ?>" >
-                                <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a> ||
+                                <?php endif; ?>
+                                <a  class="el-g-1-name-meta-vasutheme" href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a>
                                 <span class="el-g-1-date-meta-vasutheme"><?php echo get_the_date(); ?></span>
                             </div>
                             <?php endif; ?>
@@ -205,6 +207,15 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'author_image',
+            [
+                'label'   => __('Author Image', 'vasutheme'),
+                'type'    => \Elementor\Controls_Manager::SWITCHER,
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
             'show_content',
             [
                 'label'   => __('Show Content', 'vasutheme'),
@@ -225,6 +236,65 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'border_color',
+            [
+                'label' => __('Border Color', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_width',
+            [
+                'label' => __('Border Width', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_style',
+            [
+                'label' => __('Border Style', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'solid' => __('Solid', 'vasutheme'),
+                    'dotted' => __('Dotted', 'vasutheme'),
+                    'dashed' => __('Dashed', 'vasutheme'),
+                    'double' => __('Double', 'vasutheme'),
+                    'groove' => __('Groove', 'vasutheme'),
+                    'ridge' => __('Ridge', 'vasutheme'),
+                    'inset' => __('Inset', 'vasutheme'),
+                    'outset' => __('Outset', 'vasutheme'),
+                    'none' => __('None', 'vasutheme'),
+                    'hidden' => __('Hidden', 'vasutheme'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-style: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_radius',
+            [
+                'label' => __('Border Radius', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'image_border_radius',
             [
                 'label'     => __('Image Border Radius', 'vasutheme'),
@@ -239,11 +309,11 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         $this->add_control(
             'background',
             [
-                'label'     => __('Background Border Radius', 'vasutheme'),
+                'label'     => __('Category Radius', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .el-g-1-category-meta-vasutheme a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -281,6 +351,14 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'box_shadow',
+                'selector' => '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme',
             ]
         );
 

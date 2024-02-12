@@ -54,14 +54,16 @@
 
 
 .el-g-1-custom-post-item-vasutheme {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
     text-align: start;
-    background-color: #ececfa;
+    background-color: #ffffff;
     padding: 12px;
     border-radius: 10px;
     border: 1px solid var(--border-color);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     /* Add border property */
 }
 
@@ -70,35 +72,47 @@
 .el-g-1-custom-post-item-vasutheme .el-g-1-post-thumbnail-vasutheme img {
     border-radius: 10px;
     height: 180px;
-    width:100%;
+    width: 100%;
 
 }
 
-.el-g-1-custom-post-item-vasutheme:hover{
-    transform: scale(1.03);}
+.el-g-1-custom-post-item-vasutheme:hover {
+    transform: scale(1.03);
+}
 
 
-  
-  
+
+
 
 
 .el-g-1-category-meta-vasutheme a {
-    display: inline-block;
-    background-color: #000000;
+    position: absolute;
+    color: rgb(255, 255, 255);
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 5px;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
+    border-radius: 40px 10px 40px 10px;
+    background-color: #3251ba;
+    font-size: 12px;
+    left: 29px;
+    top: 175px;
+    font-family: 'Rubik', sans-serif;
+
+
+
+}
+
+.el-g-1-category-meta-vasutheme a:hover {
+    box-shadow: rgba(229, 16, 16, 0.56) 0px 22px 70px 4px;
+    transform: scale(1.03);
 }
 
 .el-g-1-post-meta-vasutheme {
     text-transform: uppercase;
     font-size: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
     margin-top: 10px;
     bottom: 10px;
@@ -113,8 +127,9 @@
 
 }
 
-.el-g-1-post-meta-vasutheme a:hover {
-    color: rgb(113, 112, 109);
+.el-g-1-name-meta-vasutheme:hover {
+    text-decoration: underline;
+    color: rgb(229, 11, 11);
 }
 
 .el-g-1-author-avatar-vasutheme {
@@ -122,4 +137,9 @@
     width: 30px;
     border-radius: 100% !important;
     border: solid 1px rgb(22, 69, 224, 0.3);
+}
+
+.el-g-1-name-meta-vasutheme {
+    margin-left: 8px;
+    margin-right: 8px;
 }
