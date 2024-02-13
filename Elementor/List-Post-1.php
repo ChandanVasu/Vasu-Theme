@@ -205,7 +205,7 @@ class List_Post_1 extends \Elementor\Widget_Base
             [
                 'label'   => __('Author Image', 'vasutheme'),
                 'type'    => \Elementor\Controls_Manager::SWITCHER,
-                'default' => 'no',
+                'default' => 'yes',
             ]
         );
 
@@ -214,7 +214,7 @@ class List_Post_1 extends \Elementor\Widget_Base
             [
                 'label'   => __('Show Content', 'vasutheme'),
                 'type'    => \Elementor\Controls_Manager::SWITCHER,
-                'default' => 'no',
+                'default' => 'yes',
             ]
         );
 
