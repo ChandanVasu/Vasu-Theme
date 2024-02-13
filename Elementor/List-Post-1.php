@@ -10,7 +10,7 @@ class List_Post_1 extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('List Post 1 Vasu Theme', 'vasutheme');
+        return __('List Style 1 - Papers', 'vasutheme');
     }
 
     // Define widget icon

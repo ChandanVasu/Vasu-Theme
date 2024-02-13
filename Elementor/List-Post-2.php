@@ -1,24 +1,23 @@
 <?php
 // Define the custom Elementor widget class
-class Grid_Post_1 extends \Elementor\Widget_Base
+class List_Post_2 extends \Elementor\Widget_Base
 {
     // Define widget name and title
     public function get_name()
     {
-        return 'Grid_Post_1';
+        return 'List_Post_2';
     }
 
     public function get_title()
     {
-        return __('Grid Style 1 - Papers', 'vasutheme');
+        return __('List Style 1 - Papers', 'vasutheme');
     }
 
     // Define widget icon
-    public function get_icon() {
-        // Assuming the custom icon is located in the 'assets' folder within your theme or plugin directory
-          return 'eicon-post-list';
+    public function get_icon()
+    {
+        return 'eicon-post-list';
     }
-    
 
     // Define widget categories
     public function get_categories()
@@ -29,6 +28,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
     // Define content to be displayed in the widget
     protected function render()
     {
+        
         $settings = $this->get_settings();
 
         // Query posts
@@ -44,39 +44,46 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         // Display posts
         if ($posts_query->have_posts()) :
             ?>
-            <div class="el-g-1-grid-container"> <!-- Modified class name -->
+            <div class="el-l-2-list-container">
                 <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
-                    <div class="el-g-1-custom-post-item-vasutheme"> <!-- Modified class name -->
+                    <div class="el-l-2-custom-post-item-vasutheme">
                         <?php if ($settings['show_image']) : ?>
-                            <div class="el-g-1-post-thumbnail-vasutheme"> <!-- Modified class name -->
+                            <div class="el-l-2-post-thumbnail-vasutheme">
                                 <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail("full"); ?></a>
                             </div>
+
+                            <div class="el-l-2-all-content-vasutheme">
+
                         <?php endif; ?>
                         <?php if ($settings['show_category']) : ?>
-                            <span class="el-g-1-category-meta-vasutheme"><?php the_category(', '); ?></span> <!-- Modified class name -->
+                            <span class="el-l-2-category-meta-vasutheme"><?php the_category(', '); ?></span>
                         <?php endif; ?>
                         <?php if ($settings['show_title']) : ?>
-                            <h2 class="el-g-1-post-title-vasutheme"><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), $settings['title_length'], '...'); ?></a></h2> <!-- Modified class name -->
+                            <h2 class="el-l-2-post-title-vasutheme"><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), $settings['title_length'], '...'); ?></a></h2>
+                        <?php endif; ?>
+
+                        <?php if ($settings['show_meta']) : ?>
+                            <div class="el-l-2-post-meta-vasutheme">
+                                <?php
+                                $author_id = get_the_author_meta('ID');
+                            $author_avatar = get_avatar_url($author_id, ['size' => 32]);
+                            ?>
+                                <?php if ($settings['author_image']) : ?>
+                                    <img class="el-l-2-author-avatar-vasutheme" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr(get_the_author()); ?>" >
+                                <?php endif; ?>
+                                <a  class="el-l-2-name-meta-vasutheme" href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a>
+                                <span class="el-l-2-date-meta-vasutheme"><?php echo get_the_date(); ?></span>
+                            </div>
                         <?php endif; ?>
     
                         <?php if ($settings['show_content']) : ?>
-                            <div class="el-g-1-post-content-vasutheme"> <!-- Modified class name -->
+                            <div class="el-l-2-post-content-vasutheme">
                                 <?php echo wp_trim_words(get_the_content(), $settings['content_length'], '...'); ?>
                             </div>
                         <?php endif; ?>
-                        <?php if ($settings['show_meta']) : ?>
-                            <div class="el-g-1-post-meta-vasutheme"> <!-- Modified class name -->
-                                <?php
-                                $author_id = get_the_author_meta('ID');
-                                $author_avatar = get_avatar_url($author_id, ['size' => 32]);
-                                ?>
-                                <?php if ($settings['author_image']) : ?>
-                                    <img class="el-g-1-author-avatar-vasutheme" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr(get_the_author()); ?>" > <!-- Modified class name -->
-                                <?php endif; ?>
-                                <a  class="el-g-1-name-meta-vasutheme" href="<?php echo esc_url(get_author_posts_url($author_id)); ?>"><?php the_author(); ?></a>
-                                <span class="el-g-1-date-meta-vasutheme"><?php echo get_the_date(); ?></span> <!-- Modified class name -->
-                            </div>
-                        <?php endif; ?>
+                        
+
+                                </div>
                     </div>
                 <?php endwhile; ?>
             </div>
@@ -144,17 +151,8 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'items_per_row_desktop',
-            [
-                'label'     => __('Items Per Row (Desktop)', 'vasutheme'),
-                'type'      => \Elementor\Controls_Manager::NUMBER,
-                'default'   => 4, // Default number of items per row on desktop
-                'selectors' => [
-                    '{{WRAPPER}} .el-g-1-grid-container' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
-                ],
-            ]
-        );
+
+
 
         $this->end_controls_section();
 
@@ -207,7 +205,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'label'   => __('Author Image', 'vasutheme'),
                 'type'    => \Elementor\Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'default' => 'no',
             ]
         );
 
@@ -216,7 +214,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'label'   => __('Show Content', 'vasutheme'),
                 'type'    => \Elementor\Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'default' => 'no',
             ]
         );
 
@@ -238,7 +236,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'type'      => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-thumbnail-vasutheme img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .el-l-2-post-thumbnail-vasutheme img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -258,14 +256,14 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 ],
                 'default' => [
                     'unit' => '',
-                    'size' => 1.03,
+                    'size' => 1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme:hover' => 'transform: scale({{SIZE}});',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme:hover' => 'transform: scale({{SIZE}});',
                 ],
             ]
         );
-        
+
 
         $this->end_controls_section();
 
@@ -284,7 +282,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Title Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-title-vasutheme a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-post-title-vasutheme a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -302,7 +300,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                     'line-through' => __('Line Through', 'vasutheme'),
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-title-vasutheme:hover ' => 'text-decoration: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-post-title-vasutheme:hover ' => 'text-decoration: {{VALUE}};',
                 ],
             ]
         );
@@ -313,7 +311,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label' => __('Title Text Color (Hover)', 'vasutheme'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-title-vasutheme:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-post-title-vasutheme:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -323,7 +321,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'name'     => 'title_typography',
                 'label'    => __('Title Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-g-1-post-title-vasutheme a',
+                'selector' => '{{WRAPPER}} .el-l-2-post-title-vasutheme a',
             ]
         );
 
@@ -344,7 +342,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Category Text Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-category-meta-vasutheme a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-category-meta-vasutheme a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -355,7 +353,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Category Background Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-category-meta-vasutheme a' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-category-meta-vasutheme a' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -365,7 +363,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'name'     => 'category_typography',
                 'label'    => __('Category Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-g-1-category-meta-vasutheme',
+                'selector' => '{{WRAPPER}} .el-l-2-category-meta-vasutheme',
             ]
         );
 
@@ -386,7 +384,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Author Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-meta-vasutheme a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-post-meta-vasutheme a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -396,7 +394,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'name'     => 'author_typography',
                 'label'    => __('Author Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-g-1-post-meta-vasutheme a',
+                'selector' => '{{WRAPPER}} .el-l-2-post-meta-vasutheme a',
             ]
         );
 
@@ -416,7 +414,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'name'     => 'date_typography',
                 'label'    => __('Date Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-g-1-date-meta-vasutheme',
+                'selector' => '{{WRAPPER}} .el-l-2-date-meta-vasutheme',
             ]
         );
 
@@ -437,7 +435,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Content Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-post-content-vasutheme' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-post-content-vasutheme' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -447,7 +445,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             [
                 'name'     => 'content_typography',
                 'label'    => __('Content Typography', 'vasutheme'),
-                'selector' => '{{WRAPPER}} .el-g-1-post-content-vasutheme',
+                'selector' => '{{WRAPPER}} .el-l-2-post-content-vasutheme',
             ]
         );
 
@@ -468,7 +466,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label' => __('Border Color', 'vasutheme'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
@@ -480,7 +478,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -504,7 +502,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                     'hidden' => __('Hidden', 'vasutheme'),
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-style: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme' => 'border-style: {{VALUE}};',
                 ],
             ]
         );
@@ -516,7 +514,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -527,7 +525,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 'label'     => __('Background Color', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -536,14 +534,14 @@ class Grid_Post_1 extends \Elementor\Widget_Base
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'box_shadow',
-                'selector' => '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme',
+                'selector' => '{{WRAPPER}} .el-l-2-custom-post-item-vasutheme',
             ]
         );
 
         $this->end_controls_section();
-
     }
 
+    // Get all categories
     private function get_all_categories_options()
     {
         $categories = get_categories();
@@ -554,7 +552,4 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         return $options;
     }
 
-    
-    
-    
 }

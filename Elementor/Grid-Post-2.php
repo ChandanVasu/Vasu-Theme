@@ -10,7 +10,7 @@ class Grid_Post_2 extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Grid Post 2 Vasu Theme', 'vasutheme');
+        return __('Grid Style 2 - Papers', 'vasutheme');
     }
 
     // Define widget icon

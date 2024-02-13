@@ -68,10 +68,12 @@ function register_hello_world_widget( $widgets_manager ) {
 	require_once( __DIR__ . '/Elementor/hello-world-widget-1.php' );
 	require_once( __DIR__ . '/Elementor/Grid-Post-1.php' );
     require_once(__DIR__ . '/Elementor/List-Post-1.php');
+    require_once(__DIR__ . '/Elementor/List-Post-2.php');
     require_once(__DIR__ . '/Elementor/Grid-Post-2.php');
 
 	$widgets_manager->register( new \Elementor_Hello_World_Widget_1() );
     $widgets_manager->register( new \List_Post_1());
+    $widgets_manager->register( new \List_Post_2());
 	$widgets_manager->register( new \Grid_Post_1() );
     $widgets_manager->register( new \Grid_Post_2() );
 
