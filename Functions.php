@@ -16,6 +16,8 @@ add_action('after_setup_theme', 'theme_setup');
 
 
 include_once get_template_directory() . '/Includes/Css-And-Js-File.php';
+include_once get_template_directory() . '/Elementor/Custom_Footer_Builder.php';
+Custom_Footer_Builder::get_instance();
 
 
 function your_theme_register_header_style_customizer($wp_customize) {
@@ -104,7 +106,6 @@ function add_elementor_widget_categories( $elements_manager ) {
 }
 
 add_action('elementor/elements/categories_registered', 'add_elementor_widget_categories');
-
 
 
 
