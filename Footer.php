@@ -1,9 +1,11 @@
-<?php  wp_footer();
- $footer_block = get_post(809); // Replace 765 with the actual ID of your footer block post
- if ($footer_block && $footer_block->post_type == 'footer-block') {
-     echo $footer_block->post_content;
- }
-?>
+<footer>
+    <?php
+    // Output Elementor footer content
 
-       
-        
+    // Output Elementor template with ID 919
+    echo do_shortcode('[elementor-template id="933"]');
+  
+    
+ wp_footer(); // Enqueue Elementor assets ?>
+    
+</footer>

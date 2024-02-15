@@ -18,34 +18,54 @@ class Custom_Footer_Builder {
 
     public function register_footer_blocks() {
         $labels = array(
-            'name'               => _x('Footer Blocks', 'post type general name', 'text-domain'),
-            'singular_name'      => _x('Footer Block', 'post type singular name', 'text-domain'),
-            'add_new'            => __('Add New', 'text-domain'),
-            'add_new_item'       => __('Add New Footer Block', 'text-domain'),
-            'edit_item'          => __('Edit Footer Block', 'text-domain'),
-            'new_item'           => __('New Footer Block', 'text-domain'),
-            'all_items'          => __('All Footer Blocks', 'text-domain'),
-            'view_item'          => __('View Footer Block', 'text-domain'),
-            'search_items'       => __('Search Footer Blocks', 'text-domain'),
-            'not_found'          => __('No footer blocks found', 'text-domain'),
-            'not_found_in_trash' => __('No footer blocks found in Trash', 'text-domain'),
-            'parent_item_colon'  => '',
-            'menu_name'          => __('Footer Blocks', 'text-domain'),
+            'name'                  => _x( 'Footers', 'Post Type General Name', 'text_domain' ),
+            'singular_name'         => _x( 'Footer', 'Post Type Singular Name', 'text_domain' ),
+            'menu_name'             => __( 'Footers', 'text_domain' ),
+            'name_admin_bar'        => __( 'Footer', 'text_domain' ),
+            'archives'              => __( 'Footer Archives', 'text_domain' ),
+            'attributes'            => __( 'Footer Attributes', 'text_domain' ),
+            'parent_item_colon'     => __( 'Parent Footer:', 'text_domain' ),
+            'all_items'             => __( 'All Footers', 'text_domain' ),
+            'add_new_item'          => __( 'Add New Footer', 'text_domain' ),
+            'add_new'               => __( 'Add New', 'text_domain' ),
+            'new_item'              => __( 'New Footer', 'text_domain' ),
+            'edit_item'             => __( 'Edit Footer', 'text_domain' ),
+            'update_item'           => __( 'Update Footer', 'text_domain' ),
+            'view_item'             => __( 'View Footer', 'text_domain' ),
+            'view_items'            => __( 'View Footers', 'text_domain' ),
+            'search_items'          => __( 'Search Footer', 'text_domain' ),
+            'not_found'             => __( 'Not found', 'text_domain' ),
+            'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+            'featured_image'        => __( 'Featured Image', 'text_domain' ),
+            'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+            'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+            'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+            'insert_into_item'      => __( 'Insert into footer', 'text_domain' ),
+            'uploaded_to_this_item' => __( 'Uploaded to this footer', 'text_domain' ),
+            'items_list'            => __( 'Footers list', 'text_domain' ),
+            'items_list_navigation' => __( 'Footers list navigation', 'text_domain' ),
+            'filter_items_list'     => __( 'Filter footers list', 'text_domain' ),
         );
 
         $args = array(
-            'labels'             => $labels,
-            'public'             => true,
-            'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
-            'query_var'          => true,
-            'rewrite'            => array('slug' => 'footer-block'),
-            'capability_type'    => 'post',
-            'has_archive'        => true,
-            'hierarchical'       => false,
-            'menu_position'      => null,
-        'supports'              => array( 'title', 'editor', 'elementor' ), // Add 'elementor' support
+            'label'                 => __( 'Footer', 'text_domain' ),
+            'description'           => __( 'Footers Description', 'text_domain' ),
+            'labels'                => $labels,
+            'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+            'taxonomies'            => array( 'category', 'post_tag' ),
+            'hierarchical'          => false,
+            'public'                => true,
+            'show_ui'               => true,
+            'show_in_menu'          => true,
+            'menu_position'         => 5,
+            'show_in_admin_bar'     => true,
+            'show_in_nav_menus'     => true,
+            'can_export'            => true,
+            'has_archive'           => true,
+            'exclude_from_search'   => false,
+            'publicly_queryable'    => true,
+            'capability_type'       => 'post',
+            'show_in_rest'          => true,
         );
 
         register_post_type('footer-block', $args);
@@ -62,7 +82,7 @@ class Custom_Footer_Builder {
 
     public function render_shortcode_column($column, $post_id) {
         if ($column === 'shortcode') {
-            echo '[footer_block id="' . $post_id . '"]';
+            echo '[vasu_theme_footer_block id="' . $post_id . '"]';
         }
     }
 
@@ -84,38 +104,16 @@ class Custom_Footer_Builder {
         $content = apply_filters('the_content', $footer_block->post_content);
 
         return $content;
-    }
 
-    public function enqueue_scripts() {
-
-        if ( class_exists( '\Elementor\Plugin' ) ) {
-            $elementor = \Elementor\Plugin::instance();
-            $elementor->frontend->enqueue_styles();
-        }
-
-        if ( class_exists( '\ElementorPro\Plugin' ) ) {
-            $elementor_pro = \ElementorPro\Plugin::instance();
-            $elementor_pro->enqueue_styles();
-        }
-
-        if ( penci_can_render_footer() ) {
-            $footer_id = penci_footer_builder_content_id();
-            $css_file  = '';
-            if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) {
-                $css_file = new \Elementor\Core\Files\CSS\Post( $footer_id );
-            } elseif ( class_exists( '\Elementor\Post_CSS_File' ) ) {
-                $css_file = new \Elementor\Post_CSS_File( $footer_id );
-            }
-
-            if ( $css_file ) {
-                $css_file->enqueue();
-            }
-        }
+        
         
     }
+
+    
     
 }
 
 // Initialize the class
 Custom_Footer_Builder::get_instance();
+
 
