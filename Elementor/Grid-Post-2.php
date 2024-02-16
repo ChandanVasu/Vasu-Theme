@@ -347,6 +347,18 @@ class Grid_Post_2 extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'border_radius',
+            [
+                'label' => __('Border Radius', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-2-category-meta-vasutheme a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
 
         $this->add_control(
             'category_bg_color',
@@ -509,9 +521,9 @@ class Grid_Post_2 extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'border_radius',
+            'background_border_radius',
             [
-                'label' => __('Border Radius', 'vasutheme'),
+                'label' => __('Bacground Border Radius', 'vasutheme'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [

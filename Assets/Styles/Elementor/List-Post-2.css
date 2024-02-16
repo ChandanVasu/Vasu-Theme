@@ -62,7 +62,23 @@
 }
 
 .el-l-2-category-meta-vasutheme a {
+  
     color: black;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    left: 29px;
+    top: 175px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.el-l-2-category-meta-vasutheme{
+    margin-bottom: 5px;
+    display: flex;
+
 }
 
 .el-l-2-author-avatar-vasutheme {
