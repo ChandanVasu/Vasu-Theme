@@ -128,6 +128,7 @@ class Custom_Title_Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
+        
 
         $this->end_controls_section();
     }
@@ -146,6 +147,7 @@ class Custom_Title_Widget extends \Elementor\Widget_Base {
         if ($title_box_style == 'style1') {
             $title_box_html = '<div class="title_box" style="display: inline-flex; align-items: center;">
                 <div class="before_title" style="height: 25px; width: 5px; background-color: rgb(219, 17, 17); display: inline-flex; margin-right: 10px; border-radius: 5px;"></div>
+                
                 <' . $title_tag . ' style="color: ' . $title_color . '; font-weight: ' . ($title_style == 'bold' ? 'bold' : 'normal') . '; font-style: ' . ($title_style == 'italic' ? 'italic' : 'normal') . '; text-decoration: ' . ($title_style == 'underline' ? 'underline' : ($title_style == 'strikethrough' ? 'line-through' : 'none')) . ';">' . $title . '</' . $title_tag . '>
             </div>';
         } elseif ($title_box_style == 'style2') {
@@ -160,4 +162,3 @@ class Custom_Title_Widget extends \Elementor\Widget_Base {
     }
 
 }
-

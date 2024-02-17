@@ -66,12 +66,7 @@
 
 .el-l-1-category-meta-vasutheme a {
     margin-bottom: 5px;
-    color: black;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 12px;
+    
 
     font-family: 'Rubik', sans-serif;
 }
@@ -102,6 +97,12 @@
 
 .el-l-1-date-meta-vasutheme{
     margin-left: 10px;
+    color: rgb(32, 31, 31);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
 }
 
 .el-l-1-name-meta-vasutheme{

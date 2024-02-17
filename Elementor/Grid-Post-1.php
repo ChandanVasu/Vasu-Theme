@@ -50,11 +50,12 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                         <?php if ($settings['show_image']) : ?>
                             <div class="el-g-1-post-thumbnail-vasutheme"> <!-- Modified class name -->
                                 <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail("full"); ?></a>
-                            </div>
-                        <?php endif; ?>
-                        <?php if ($settings['show_category']) : ?>
+                                <?php if ($settings['show_category']) : ?>
                             <span class="el-g-1-category-meta-vasutheme"><?php the_category(', '); ?></span> <!-- Modified class name -->
                         <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                       
                         <?php if ($settings['show_title']) : ?>
                             <h2 class="el-g-1-post-title-vasutheme"><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), $settings['title_length'], '...'); ?></a></h2> <!-- Modified class name -->
                         <?php endif; ?>
@@ -147,14 +148,46 @@ class Grid_Post_1 extends \Elementor\Widget_Base
         $this->add_responsive_control(
             'items_per_row_desktop',
             [
-                'label'     => __('Items Per Row (Desktop)', 'vasutheme'),
+                'label'     => __('Items Per Row ', 'vasutheme'),
                 'type'      => \Elementor\Controls_Manager::NUMBER,
-                'default'   => 4, // Default number of items per row on desktop
+                // 'default'   => 4, 
                 'selectors' => [
                     '{{WRAPPER}} .el-g-1-grid-container' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
                 ],
             ]
         );
+
+        $this->add_control(
+            'text_align',
+            [
+                'label' => __('Text Align', 'vasutheme'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'vasutheme'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'vasutheme'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'vasutheme'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'align-items: {{VALUE}}; text-align: {{VALUE}};',
+                ],
+            ]
+        );
+        
+    
+
+   
+        
+        
 
         $this->end_controls_section();
 
@@ -370,6 +403,17 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_responsive_control(
+    'category_position',
+    [
+        'label' => __('Category Position', 'vasutheme'),
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'size_units' => ['px', '%'],
+        'selectors' => [
+            '{{WRAPPER}} .el-g-1-category-meta-vasutheme a' => 'left: {{LEFT}}{{UNIT}}; bottom: {{BOTTOM}}{{UNIT}};',
+        ],
+    ]
+);
 
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),

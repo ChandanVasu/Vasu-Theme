@@ -9,7 +9,6 @@
  * @package YourThemeName
  */
 
-$selected_header_style = get_theme_mod('header_style_setting', 'header1'); // Get the selected header style from Customizer
 
 ?>
 <!DOCTYPE html>
@@ -28,4 +27,13 @@ $selected_header_style = get_theme_mod('header_style_setting', 'header1'); // Ge
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<?php get_template_part('Template/Header-Template/' . $selected_header_style, 'template'); ?>
+<?php
+// Check if the Elementor template with ID 933 exists
+if ( \Elementor\Plugin::instance()->db->is_built_with_elementor( 1206 ) ) {
+    // Output Elementor template with ID 933
+    echo do_shortcode('[elementor-template id="1206"]');
+} else {
+    // Output default header content
+    echo '<h1>This Is Header</h1>';
+}
+?>
