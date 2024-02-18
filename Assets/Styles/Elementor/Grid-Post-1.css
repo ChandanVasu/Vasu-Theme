@@ -63,10 +63,15 @@
     border-radius: 4px;
     height: 180px;
     width: 100%;
+    /* max-width: 100%; */
+
 }
+
 
 .el-g-1-post-thumbnail-vasutheme {
     position: relative;
+    width: 100%;
+    /* max-width: 100%; */
 }
 
 .el-g-1-custom-post-item-vasutheme:hover {

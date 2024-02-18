@@ -73,6 +73,8 @@ function register_hello_world_widget( $widgets_manager ) {
     require_once(__DIR__ . '/Elementor/List-Post-2.php');
     require_once(__DIR__ . '/Elementor/Grid-Post-2.php');
     require_once(__DIR__ . '/Elementor/Heading-Title-Elementor.php');
+    require_once(__DIR__ . '/Elementor/Single-Post-Content.php');
+
 
 
 	$widgets_manager->register( new \Elementor_Hello_World_Widget_1() );
@@ -81,6 +83,8 @@ function register_hello_world_widget( $widgets_manager ) {
 	$widgets_manager->register( new \Grid_Post_1() );
     $widgets_manager->register( new \Grid_Post_2() );
     $widgets_manager->register( new \Custom_Title_Widget() );
+    $widgets_manager->register( new \Single_Post_Content_Widget() );
+
 
 
 }
