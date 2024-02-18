@@ -5,6 +5,8 @@
     box-sizing: border-box;
 }
 
+
+
 :root {
     --background-color: #fff;
     /* Background color of each post item */
@@ -106,7 +108,6 @@
 }
 
 .el-g-2-category-meta-vasutheme a:hover {
-    box-shadow: rgba(229, 16, 16, 0.56) 0px 22px 70px 4px;
     transform: scale(1.03);
 }
 

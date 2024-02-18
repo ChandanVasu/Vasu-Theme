@@ -176,7 +176,7 @@ class Grid_Post_1 extends \Elementor\Widget_Base
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
-                'default' => 'center',
+                'default' => 'Left',
                 'selectors' => [
                     '{{WRAPPER}} .el-g-1-custom-post-item-vasutheme' => 'align-items: {{VALUE}}; text-align: {{VALUE}};',
                 ],

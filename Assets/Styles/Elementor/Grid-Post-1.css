@@ -5,6 +5,32 @@
     box-sizing: border-box;
 }
 
+.header-content-vasutheme {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+@keyframes wipe-in-up {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+}
+
+.header-content-vasutheme.sticky {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-up both;
+}
+
+
+
+#wpadminbar{
+    z-index: 0;
+}
+
+
 :root {
     --background-color: #fff;      /* Background color of each post item */
     --border-color: #0c52de;       /* Border color of each post item */
