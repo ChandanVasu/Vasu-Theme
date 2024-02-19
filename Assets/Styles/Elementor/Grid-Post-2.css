@@ -10,7 +10,7 @@
 :root {
     --background-color: #fff;
     /* Background color of each post item */
-    --border-color: #0c52de;
+    --border-colosr: #75de0c;
     /* Border color of each post item */
     --text-color: #333;
     /* Text color */
@@ -73,6 +73,7 @@
     border: 1px solid var(--border-color);
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
     /* Add border property */
+    
 }
 
 

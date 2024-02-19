@@ -16,7 +16,7 @@ add_action('after_setup_theme', 'theme_setup');
 
 
 include_once get_template_directory() . '/Includes/Css-And-Js-File.php';
-include_once get_template_directory() . '/Elementor/Custom_Footer_Builder.php';
+include_once get_template_directory() . '/Includes/Custom_Footer_Builder.php';
 // Custom_Footer_Builder::get_instance();
 
 

@@ -8,25 +8,13 @@
 .header-content-vasutheme {
     position: sticky;
     top: 0;
-    z-index: 9999;
-}
-
-@keyframes wipe-in-up {
-    from {
-      clip-path: inset(100% 0 0 0);
-    }
-    to {
-      clip-path: inset(0 0 0 0);
-    }
-}
-
-.header-content-vasutheme.sticky {
-    animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-up both;
+    z-index: 1;
 }
 
 
 
-#wpadminbar{
+#wpadminbar {
+    background-color: rgb(0, 0, 0);
     z-index: 0;
 }
 
