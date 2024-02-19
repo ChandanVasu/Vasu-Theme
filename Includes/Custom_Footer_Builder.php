@@ -115,5 +115,3 @@ class Custom_Footer_Builder {
 
 // Initialize the class
 Custom_Footer_Builder::get_instance();
-
-

@@ -22,7 +22,7 @@ class List_Post_2 extends \Elementor\Widget_Base
     // Define widget categories
     public function get_categories()
     {
-        return ['VASU-X'];
+        return ['Vasu X'];
     }
 
     // Define content to be displayed in the widget

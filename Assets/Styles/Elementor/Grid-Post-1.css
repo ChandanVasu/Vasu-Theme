@@ -6,7 +6,7 @@
 }
 
 .header-content-vasutheme {
-    position: sticky;
+    position: static;
     top: 0;
     z-index: 1;
 }
@@ -15,7 +15,7 @@
 
 #wpadminbar {
     background-color: rgb(0, 0, 0);
-    z-index: 0;
+    z-index: 2;
 }
 
 

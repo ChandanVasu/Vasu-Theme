@@ -19,7 +19,7 @@ class Single_Post_Content_Widget extends \Elementor\Widget_Base {
 
     // Widget Category
     public function get_categories() {
-        return [ 'basic' ];
+        return [ 'Vasu X' ];
     }
 
     // Render Widget Output

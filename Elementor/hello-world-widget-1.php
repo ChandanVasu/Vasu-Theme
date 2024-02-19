@@ -14,7 +14,7 @@ class Elementor_Hello_World_Widget_1 extends \Elementor\Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'VASU-X' ];
+		return [ 'Vasu X' ];
 	}
 
 	public function get_keywords() {

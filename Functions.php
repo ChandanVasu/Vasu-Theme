@@ -96,9 +96,9 @@ add_action( 'elementor/widgets/register', 'register_hello_world_widget' );
 function add_elementor_widget_categories( $elements_manager ) {
 
 	$categories = [];
-	$categories['VASU-X'] =
+	$categories['Vasu X'] =
 		[
-			'title' => 'VASU-X',
+			'title' => 'Vasu X',
 			'icon'  => 'fa fa-plug'
 		];
 
@@ -116,3 +116,6 @@ function add_elementor_widget_categories( $elements_manager ) {
 add_action('elementor/elements/categories_registered', 'add_elementor_widget_categories');
 
 
+add_filter( 'elementor/theme/post_types/default_template_type', function( $post_type ) {
+    return 'full_width'; // Set the default template to "Full Width"
+});
