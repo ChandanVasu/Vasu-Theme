@@ -2,7 +2,7 @@
 
 namespace WPV_AE;
 
-class PostType{
+class PostTypes{
 
     private static $_instance = null;
 
@@ -24,14 +24,14 @@ class PostType{
     public function register_post_type(){
 
         $labels = array(
-            'name'                  => _x( 'AEs Global Templates', 'Post Type General Name', 'wts_ae' ),
-            'singular_name'         => _x( 'AE Template', 'Post Type Singular Name', 'wts_ae' ),
-            'menu_name'             => __( 'AE Templates', 'wts_ae' ),
-            'name_admin_bar'        => __( 'AE Templates', 'wts_ae' ),
+            'name'                  => _x( 'Paper Template', 'Post Type General Name', 'wts_ae' ),
+            'singular_name'         => _x( 'Paper Template', 'Post Type Singular Name', 'wts_ae' ),
+            'menu_name'             => __( 'Paper Template', 'wts_ae' ),
+            'name_admin_bar'        => __( 'Paper Template', 'wts_ae' ),
             'archives'              => __( 'List Archives', 'wts_ae' ),
             'parent_item_colon'     => __( 'Parent List:', 'wts_ae' ),
-            'all_items'             => __( 'All AE Templates', 'wts_ae' ),
-            'add_new_item'          => __( 'Add New AE Template', 'wts_ae' ),
+            'all_items'             => __( 'All Paper Template', 'wts_ae' ),
+            'add_new_item'          => __( 'Add New Paper Template', 'wts_ae' ),
             'add_new'               => __( 'Add New', 'wts_ae' ),
             'new_item'              => __( 'New AE Template', 'wts_ae' ),
             'edit_item'             => __( 'Edit AE Template', 'wts_ae' ),
@@ -53,8 +53,9 @@ class PostType{
             'exclude_from_search'   => true,
             'capability_type'       => 'post',
             'hierarchical'          => false,
-            'menu-icon'             => 'dashicons-text-page'
+            'menu_icon'             => 'dashicons-text-page' // Corrected parameter name
         );
+        
         register_post_type( 'ae_global_templates', $args );
 
     }
@@ -68,4 +69,7 @@ class PostType{
 
 }
 
-PostType::instance();
+PostTypes::instance();
+
+
+
