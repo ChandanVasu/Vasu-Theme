@@ -11,3 +11,9 @@ function enqueue_styles_and_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_styles_and_scripts');
+
+
+
+
+
+

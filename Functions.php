@@ -17,6 +17,7 @@ add_action('after_setup_theme', 'theme_setup');
 
 include_once get_template_directory() . '/Includes/Css-And-Js-File.php';
 include_once get_template_directory() . '/Includes/Custom_Footer_Builder.php';
+
 // Custom_Footer_Builder::get_instance();
 
 
@@ -119,3 +120,5 @@ add_action('elementor/elements/categories_registered', 'add_elementor_widget_cat
 add_filter( 'elementor/theme/post_types/default_template_type', function( $post_type ) {
     return 'full_width'; // Set the default template to "Full Width"
 });
+
+
