@@ -14,12 +14,6 @@ function theme_setup() {
 add_action('after_setup_theme', 'theme_setup');
 
 
-include_once get_template_directory() . '/Includes/shortcode.php';
-include_once get_template_directory() . '/Includes/bootstrap.php';
-include_once get_template_directory() . '/Includes/meta-box.php';
-
-
-
 
 include_once get_template_directory() . '/Includes/Css-And-Js-File.php';
 include_once get_template_directory() . '/Includes/post-type.php';

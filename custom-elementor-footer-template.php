@@ -1,8 +1,5 @@
 <?php
-/**
- * Template Name: Custom Elementor Footer Template
- * Template Post Type: page
- */
+
 
 get_header(); ?>
 

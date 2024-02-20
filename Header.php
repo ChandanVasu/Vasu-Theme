@@ -29,7 +29,13 @@
 
 <div class="header-content-vasutheme">
     <?php
-           get_template_part('Template/Header-Template/header1');
-
+    // Check if the Elementor template with ID 933 exists
+    if ( \Elementor\Plugin::instance()->db->is_built_with_elementor( 593 ) ) {
+        // Output Elementor template with ID 933
+        echo do_shortcode('[Paper_Template id="658"]');
+    } else {
+        // Output default header content
+        get_template_part('Template/Header-Template/header1');
+    }
     ?>
 </div>
